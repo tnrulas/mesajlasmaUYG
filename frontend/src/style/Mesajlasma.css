@@ -1,0 +1,169 @@
+/* Tüm sohbetin içinde duracağı ana çerçeve */
+.mesajlasma-ana-kutu {
+    width: 100%;
+    max-width: 800px;
+    height: 75vh;
+    /* Ekranın %75'ini kaplasın */
+    min-height: 500px;
+    margin: 40px auto;
+    background-color: #f8fafc;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(149, 157, 165, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Kenar yuvarlaklıklarından taşmaları engeller */
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Üst kısımdaki başlık çubuğu */
+.mesajlasma-baslik {
+    background-color: #ffffff;
+    padding: 16px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    z-index: 10;
+}
+
+.mesajlasma-baslik h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #1e293b;
+    font-weight: 700;
+}
+
+/* Mesajların listelendiği, kaydırılabilir orta alan */
+.mesajlar-alani {
+    flex: 1;
+    /* Kalan tüm boşluğu doldurur */
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* Mesajlar arası boşluk */
+}
+
+/* Scrollbar Tasarımı */
+.mesajlar-alani::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mesajlar-alani::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 10px;
+}
+
+/* Her bir mesajın satırı */
+.mesaj-satiri {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* BENİM MESAJIM: Kutuyu en sağa yasla */
+.mesaj-satiri.benim-mesajim {
+    justify-content: flex-end;
+}
+
+/* KARŞININ MESAJI: Kutuyu en sola yasla */
+.mesaj-satiri.karsi-mesaj {
+    justify-content: flex-start;
+}
+
+/* İstersen kendi mesajının balon rengini de değiştirebilirsin */
+.mesaj-satiri.benim-mesajim .mesaj-balonu {
+    background-color: #dcf8c6;
+    /* WhatsApp yeşili gibi */
+}
+
+/* Sohbet Balonu Tasarımı */
+.mesaj-balonu {
+    background-color: #ffffff;
+    padding: 12px 16px;
+    border-radius: 16px;
+    border-bottom-left-radius: 4px;
+    /* WhatsApp tarzı kuyruk efekti için köşeyi sivrilttik */
+    box-shadow: 0 2px 8px rgba(149, 157, 165, 0.1);
+    max-width: 75%;
+    /* Çok uzun mesajların ekranı boydan boya kaplamasını engeller */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Gönderen kişinin ismi */
+.gonderici-isim {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #2563eb;
+    /* Önceki sayfalardaki mavi tonumuz */
+    margin-bottom: 4px;
+}
+
+/* Mesajın asıl içeriği */
+.mesaj-metni {
+    font-size: 1rem;
+    color: #334155;
+    line-height: 1.5;
+    word-break: break-word;
+    /* Uzun kelimelerin taşıp tasarımı bozmasını engeller */
+}
+
+/* En alttaki mesaj yazma paneli */
+.mesaj-yazma-alani {
+    background-color: #ffffff;
+    padding: 16px 24px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Metin kutusu (Input) */
+.mesaj-input {
+    flex: 1;
+    background-color: #f1f5f9;
+    border: 1px solid transparent;
+    padding: 14px 20px;
+    border-radius: 24px;
+    /* Tam yuvarlak hap tasarımı */
+    font-size: 1rem;
+    color: #1e293b;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.mesaj-input:focus {
+    background-color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+/* Gönder Butonu */
+.gonder-buton {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    /* Tam yuvarlak buton */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.gonder-buton:hover {
+    background-color: #1d4ed8;
+    transform: scale(1.05);
+    /* Üzerine gelince hafifçe büyür */
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.gonder-buton:active {
+    transform: scale(0.95);
+    /* Tıklanma hissiyatı */
+}

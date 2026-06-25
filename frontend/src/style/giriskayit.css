@@ -1,0 +1,92 @@
+/* Ana form konteyneri: Kullanıcı listesiyle aynı 'kart' hissiyatı */
+.girisregisterform {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(149, 157, 165, 0.15);
+    padding: 40px 32px;
+    margin: 60px auto;
+    /* Sayfanın ortasında durması için */
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Başlık: Formun en üstündeki Giriş Yap / Kayıt Ol yazısı */
+.girisregisterform h2 {
+    font-size: 1.8rem;
+    color: #1e293b;
+    margin-top: 0;
+    margin-bottom: 32px;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* Form düzeni: Elemanları alt alta düzgün dizmek için flexbox */
+.girisregisterform form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Etiketler (Labels) */
+.girisregisterform label {
+    font-size: 0.95rem;
+    color: #475569;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+/* Girdi alanları (Inputs) */
+.girisregisterform input {
+    padding: 14px 16px;
+    margin-bottom: 24px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background-color: #f8fafc;
+    font-size: 1rem;
+    color: #1e293b;
+    transition: all 0.2s ease-in-out;
+    outline: none;
+}
+
+/* Girdi alanına tıklandığında (Focus durumu): Mavi bir parlama efekti */
+.girisregisterform input:focus {
+    border-color: #2563eb;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    /* Dıştaki yumuşak mavi halka */
+}
+
+/* Buton tasarımı */
+.girisregisterform button {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+}
+
+/* Buton üzerine gelindiğinde (Hover) */
+.girisregisterform button:hover:not(:disabled) {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+}
+
+/* Tıklandığında butonun hafifçe içeri çökmesi hissiyatı */
+.girisregisterform button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Buton yükleniyor (disabled) durumundayken */
+.girisregisterform button:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+    opacity: 0.7;
+}

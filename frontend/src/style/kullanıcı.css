@@ -1,0 +1,76 @@
+/* Ana taşıyıcı konteyner: Modern ve hafif gölgeli bir kart görünümü */
+.kullaniciliste {
+    width: 100%;
+    max-width: 350px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(149, 157, 165, 0.15);
+    padding: 24px;
+    margin: 20px auto;
+    /* Ortalama için */
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Başlık kısmı: Altı ince çizgili, şık bir duruş */
+.kullanici {
+    font-size: 1.4rem;
+    color: #1e293b;
+    margin-top: 0;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* Her bir kullanıcı kartı */
+.kull {
+    padding: 16px;
+    margin-bottom: 12px;
+    background-color: #f8fafc;
+    border-radius: 10px;
+    color: #475569;
+    font-size: 1.05rem;
+    font-weight: 500;
+    cursor: pointer;
+    /* Tıklanabilir hissi verir */
+    transition: all 0.2s ease-in-out;
+    /* Hover animasyonlarının yumuşak olması için */
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+}
+
+/* Fare ile üzerine gelindiğindeki etkileşim (Hover State) */
+.kull:hover {
+    background-color: #eff6ff;
+    /* Hafif mavi bir arkaplan */
+    color: #2563eb;
+    /* Yazı rengi daha canlı bir maviye döner */
+    border-color: #bfdbfe;
+    /* Etrafında ince mavi bir çerçeve belirir */
+    transform: translateY(-2px);
+    /* Kart çok hafif yukarı kalkar */
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+    /* Tıklama hissiyatını güçlendiren gölge */
+}
+
+/* İlerisi için ufak bir hediye: Kullanıcıların başına sahte bir 'durum/avatar' noktası koyalım */
+.kull::before {
+    content: '';
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background-color: #cbd5e1;
+    /* İleride bunu profil fotoğrafı veya online/offline yeşil noktası yapabilirsin */
+    border-radius: 50%;
+    margin-right: 16px;
+    flex-shrink: 0;
+    /* Avatar hissi vermesi için içine baş harf koymuş gibi bir stil (opsiyonel) */
+    background-image: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+}
+
+/* Listenin son elemanının alt boşluğunu sıfırlayalım ki gereksiz taşma olmasın */
+.kull:last-child {
+    margin-bottom: 0;
+}
