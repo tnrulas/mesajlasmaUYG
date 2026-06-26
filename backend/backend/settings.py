@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [
     "192.168.1.79",
     "free-chat-with-friends.com",
     "www.free-chat-with-friends.com",
+    "mesajlasmauyg.onrender.com"
 ]
 
 REST_FRAMEWORK = { #14.
@@ -105,7 +106,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": [os.getenv("REDIS_URL")],
         },
     },
 }
