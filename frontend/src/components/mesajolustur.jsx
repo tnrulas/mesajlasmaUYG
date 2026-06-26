@@ -58,7 +58,7 @@ const Mesajlasma = () => {
         if (!conversationId) return;
 
         const token = localStorage.getItem(ACCESS_TOKEN);
-        const websocket = new WebSocket(`ws://localhost:8000/ws/chat/${conversationId}/?token=${token}`);
+        const websocket = new WebSocket(`wss://mesajlasmauyg.onrender.com/ws/chat/${conversationId}/?token=${token}`);
 
         websocket.onopen = () => console.log('websocket açılmıştır')
 
