@@ -82,8 +82,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def mesaj_kaydet(self, icerik):
-        return Mesaj.objects.create(
-            mesajlasma_alanı_id=self.alan_id,
-            gönderici=self.kullanıcı,
-            icerik=icerik
-        )
+        close_old_connections()
+        try:
+            return Mesaj.objects.create(
+                mesajlasma_alanı_id=self.alan_id,
+                gönderici=self.kullanıcı,
+                icerik=icerik
+            )
+        finally:
+            close_old_connections()
