@@ -88,9 +88,9 @@ const Mesajlasma = () => {
         websocket.onerror = (error) => console.error("WebSocket Error:", error);
         setSocket(websocket);
 
-        // return () => {
-        //     websocket.close();
-        // }
+        return () => {
+            websocket.close();
+        }
     }, [conversationId]);
 
     const handleSendMessage = () => {
