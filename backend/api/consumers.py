@@ -41,8 +41,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         
         data = json.loads(text_data)
         
-        if data.get('type') == 'ping':
-            return
         
         icerik = data.get('message', '').strip()
 
