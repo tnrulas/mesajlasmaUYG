@@ -13,7 +13,7 @@ const Mesajlasma = () => {
     const [messages, setMessages] = useState([])
     const [loading, setLoading] = useState(null)
     const [newMessage, setNewMessage] = useState("");
-    const [socket, setSocket] = useState(null)
+    const socketRef = useRef(null);
 
 
     const messagesEndRef = useRef(null);
@@ -63,15 +63,15 @@ const Mesajlasma = () => {
 
         const connect = () => {
             if (isUnmounting) return;
-
             const token = localStorage.getItem(ACCESS_TOKEN);
-            websocket = new WebSocket(
+            const websocket = new WebSocket(
                 `wss://mesajlasmauyg-1.onrender.com/ws/chat/${conversationId}/?token=${token}`
             );
+            socketRef.current = websocket;
 
             websocket.onopen = () => {
                 console.log("WebSocket açıldı");
-                setSocket(websocket);
+
             };
 
             websocket.onmessage = (event) => {
@@ -121,11 +121,12 @@ const Mesajlasma = () => {
         };
     }, [conversationId]);
 
+
     const handleSendMessage = () => {
         if (!conversationId || !newMessage.trim()) return;
 
-        if (socket?.readyState === WebSocket.OPEN) {
-            socket.send(JSON.stringify({
+        if (socketRef.current?.readyState === WebSocket.OPEN) {
+            socketRef.current.send(JSON.stringify({
                 type: "chat_message",
                 message: newMessage,
                 user: currentUser,
@@ -134,7 +135,7 @@ const Mesajlasma = () => {
         } else {
             console.error("WebSocket is not open.");
         }
-    }
+    };
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
