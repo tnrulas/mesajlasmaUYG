@@ -171,9 +171,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "https://free-chat-with-friends.com",
     "https://www.free-chat-with-friends.com",
+    "https://mesajlasmauyg-1.onrender.com"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://free-chat-with-friends.com",
     "https://www.free-chat-with-friends.com",
+    "https://mesajlasmauyg-1.onrender.com"
 ]
