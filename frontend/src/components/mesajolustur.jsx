@@ -95,6 +95,7 @@ const Mesajlasma = () => {
         setSocket(websocket);
 
         return () => {
+            clearInterval(heartbeat);
             websocket.close();
         }
     }, [conversationId]);
