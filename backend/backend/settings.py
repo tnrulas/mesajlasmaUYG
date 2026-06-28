@@ -30,13 +30,12 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    # "127.0.0.1",
-    # "localhost",
-    # "192.168.1.79",
-    # "free-chat-with-friends.com",
-    # "www.free-chat-with-friends.com",
-    # "mesajlasmauyg.onrender.com"
-    "*"
+    "127.0.0.1",
+    "localhost",
+    "192.168.1.79",
+    "free-chat-with-friends.com",
+    "www.free-chat-with-friends.com",
+    "mesajlasmauyg.onrender.com"
 ]
 
 REST_FRAMEWORK = { #14.
@@ -169,10 +168,9 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 CORS_ALLOWED_ORIGINS = [
-    # "http://localhost:5173",
-    # "https://free-chat-with-friends.com",
-    # "https://www.free-chat-with-friends.com",
-    True
+    "http://localhost:5173",
+    "https://free-chat-with-friends.com",
+    "https://www.free-chat-with-friends.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
