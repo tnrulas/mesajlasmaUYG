@@ -3,6 +3,7 @@ from channels.db import database_sync_to_async
 from django.contrib.auth.models import User
 from .models import MesajlasmaAlanı, Mesaj
 import json
+from django.db import close_old_connections
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -32,11 +33,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
     async def receive(self, text_data):
-        katılımcı_mı = await self.katilimci_kontrol()
+        # katılımcı_mı = await self.katilimci_kontrol()
         
-        if not katılımcı_mı:
-            await self.close()
-            return
+        # if not katılımcı_mı:
+        #     await self.close()
+        #     return
         
         data = json.loads(text_data)
         icerik = data.get('message', '').strip()
@@ -69,10 +70,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def katilimci_kontrol(self):
-        return MesajlasmaAlanı.objects.filter(
-            id=self.alan_id,
-            katılımcılar=self.kullanıcı
-        ).exists()
+        close_old_connections()
+        try:
+            return MesajlasmaAlanı.objects.filter(
+                id=self.alan_id,
+                katılımcılar=self.kullanıcı
+            ).exists()
+        finally:
+            close_old_connections()
+        
 
     @database_sync_to_async
     def mesaj_kaydet(self, icerik):
