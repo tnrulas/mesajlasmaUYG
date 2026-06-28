@@ -103,20 +103,14 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 ASGI_APPLICATION = 'backend.asgi.application'
 
-ssl_context = ssl.create_default_context()
-ssl_context.check_hostname = False
-ssl_context.verify_mode = ssl.CERT_NONE
 
-redis_url = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379')
 
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [{
-                'address': redis_url,
-                'ssl': ssl_context if redis_url.startswith('rediss://') else None,
-            }],
+            
+            'hosts': [os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379')],
         },
     },
 }
