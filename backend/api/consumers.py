@@ -48,16 +48,19 @@ class ChatConsumer(AsyncWebsocketConsumer):
         mesaj = await self.mesaj_kaydet(icerik)
         
 
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                'type': 'chat_message',
-                'id': self.kullanıcı.id,
-                'gönderici': self.kullanıcı.username,
-                'icerik': icerik,
-                'gönderilme_tarihi': str(mesaj.gönderilme_tarihi),
-            }
-        )
+        try:
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_message',
+                    'id': self.kullanıcı.id,
+                    'gönderici': self.kullanıcı.username,
+                    'icerik': icerik,
+                    'gönderilme_tarihi': str(mesaj.gönderilme_tarihi),
+                }
+            )
+        except Exception as e:
+            print(f"\n!!! REDIS YAYIN HATASI !!!: {e}\n")
 
     async def chat_message(self, event):
         await self.send(text_data=json.dumps({
