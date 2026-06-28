@@ -125,6 +125,7 @@ DATABASES = {
         'PORT': os.getenv("DB_PORT", "3306"),
         'OPTIONS': {
             'ssl': {'ca': None},
+            'charset': 'utf8mb4',
         }
     }
 }
