@@ -62,6 +62,12 @@ const Mesajlasma = () => {
 
         websocket.onopen = () => console.log('websocket açılmıştır')
 
+        const heartbeat = setInterval(() => {
+            if (websocket.readyState === WebSocket.OPEN) {
+                websocket.send(JSON.stringify({ type: "ping" }));
+            }
+        }, 15000)
+
         websocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
             if (data.type === "chat_message") {
