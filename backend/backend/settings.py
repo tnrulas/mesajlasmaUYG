@@ -35,7 +35,7 @@ ALLOWED_HOSTS = [
     "192.168.1.79",
     "free-chat-with-friends.com",
     "www.free-chat-with-friends.com",
-    "mesajlasmauyg.onrender.com"
+    "mesajlasmauyg-1.onrender.com"
 ]
 
 REST_FRAMEWORK = { #14.
