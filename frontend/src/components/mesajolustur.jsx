@@ -57,40 +57,68 @@ const Mesajlasma = () => {
     useEffect(() => {
         if (!conversationId) return;
 
-        const token = localStorage.getItem(ACCESS_TOKEN);
-        const websocket = new WebSocket(`wss://mesajlasmauyg-1.onrender.com/ws/chat/${conversationId}/?token=${token}`);
+        let websocket = null;
+        let reconnectTimeout = null;
+        let isUnmounting = false;
 
-        websocket.onopen = () => console.log('websocket açılmıştır')
+        const connect = () => {
+            if (isUnmounting) return;
 
-        websocket.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            if (data.type === "chat_message") {
-                const { gönderici, icerik, gönderilme_tarihi, id } = data;
-                setMessages((prev) => [
-                    ...prev,
-                    { gönderici: { id: id, username: gönderici }, icerik, gönderilme_tarihi }
-                ]);
-            }
-        };
-
-        websocket.onclose = async () => {
-            const conversationsresponse = await api.get("anasayfa/");
-            const veri = conversationsresponse.data
-            const bul = veri.some((ve) =>
-                String(ve.id) === String(conversationId)
+            const token = localStorage.getItem(ACCESS_TOKEN);
+            websocket = new WebSocket(
+                `wss://mesajlasmauyg-1.onrender.com/ws/chat/${conversationId}/?token=${token}`
             );
 
-            if (!bul) {
-                navigation(`/home`)
-            }
-        }
+            websocket.onopen = () => {
+                console.log("WebSocket açıldı");
+                setSocket(websocket);
+            };
 
-        websocket.onerror = (error) => console.error("WebSocket Error:", error);
-        setSocket(websocket);
+            websocket.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                if (data.type === "chat_message") {
+                    const { gönderici, icerik, gönderilme_tarihi, id } = data;
+                    setMessages((prev) => [
+                        ...prev,
+                        { gönderici: { id: id, username: gönderici }, icerik, gönderilme_tarihi }
+                    ]);
+                }
+            };
+
+            websocket.onclose = async () => {
+                setSocket(null);
+
+
+                try {
+                    const res = await api.get("anasayfa/");
+                    const bul = res.data.some(
+                        (ve) => String(ve.id) === String(conversationId)
+                    );
+                    if (!bul) {
+                        navigation("/home");
+                        return;
+                    }
+                } catch (_) { }
+
+
+                if (!isUnmounting) {
+                    console.log("Yeniden bağlanılıyor...");
+                    reconnectTimeout = setTimeout(connect, 2000);
+                }
+            };
+
+            websocket.onerror = () => {
+                websocket.close();
+            };
+        };
+
+        connect();
 
         return () => {
-            websocket.close();
-        }
+            isUnmounting = true;
+            clearTimeout(reconnectTimeout);
+            websocket?.close();
+        };
     }, [conversationId]);
 
     const handleSendMessage = () => {
